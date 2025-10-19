@@ -1,12 +1,15 @@
-const http = require('http');
+const https = require('https');
+const fs = require('fs');
 const port = 8080;
 
-const server = http.createServer((req, res) => {
-  res.statusCode = 200;
-  const msg = 'Hello Node!\n'
-  res.end(msg);
-});
+const options = {
+  key: fs.readFileSync('/etc/tls/tls.key'),
+  cert: fs.readFileSync('/etc/tls/tls.crt')
+};
 
-server.listen(port, () => {
-  console.log(`Server running on http://localhost:${port}/`);
+https.createServer(options, (req, res) => {
+  res.statusCode = 200;
+  res.end('Hello Secure Node!\n');
+}).listen(port, () => {
+  console.log(`Secure server running on https://localhost:${port}/`);
 });
