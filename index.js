@@ -10,6 +10,6 @@ const options = {
 https.createServer(options, (req, res) => {
   res.statusCode = 200;
   res.end('Hello Secure Node!\n');
-}).listen(port, () => {
-  console.log(`Secure server running on https://localhost:${port}/`);
+}).listen(port, '0.0.0.0', () => {
+  console.log(`Secure server running on https://0.0.0.0:${port}/`);
 });
